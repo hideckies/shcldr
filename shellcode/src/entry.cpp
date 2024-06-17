@@ -1,7 +1,5 @@
 #include "entry.hpp"
 
-using DLLEntry = BOOL(WINAPI *)(HINSTANCE dll, DWORD reason, LPVOID reserved);
-
 __attribute__((section(".text.Entry"))) VOID Entry()
 {
     // ------------------------------------------------------------------
@@ -32,5 +30,5 @@ __attribute__((section(".text.Entry"))) VOID Entry()
     // Execute arbitrary function
     // ------------------------------------------------------------------
 
-    lpMessageBoxA(NULL, "Injected shellcode successfully", "", MB_OK);
+    lpMessageBoxA(NULL, "Injected shellcode successfully;)", "shcldr", MB_OK);
 }

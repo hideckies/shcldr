@@ -1,10 +1,9 @@
-ENTRY(AlignStack)
 SECTIONS
 {
 	.text :
 	{
-		*(.text.AlignStack)
-		*(.text.Entry)
+		*(.text.*AlignStack)
+		*(.text.*Entry)
 		*(.rdata*)
 	}
 }
