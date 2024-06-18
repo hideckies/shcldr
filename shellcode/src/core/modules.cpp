@@ -59,34 +59,32 @@ namespace Modules
     }
 
     // Load a module with LdrLoadDll.
-    // PVOID LoadModule(Procs::PPROCS pProcs, LPWSTR lpDllName)
-    // {
-    //     PVOID pModule = nullptr;
-    //     LPCWSTR lpcDllName = static_cast<LPCWSTR>(lpDllName);
+    PVOID LoadModule(Procs::LPPROC_LDRLOADDLL lpLdrLoadDll, LPWSTR lpDllName)
+    {
+        PVOID pModule = nullptr;
+        LPCWSTR lpcDllName = static_cast<LPCWSTR>(lpDllName);
 
-    //     // Get string length
-    //     LPCWSTR wStr2;
-    //     for (wStr2 = lpcDllName; *wStr2; ++wStr2);
-	// 	USHORT uDllNameLen = (wStr2 - lpcDllName) * sizeof(WCHAR);
+        // Get string length
+        LPCWSTR wStr2;
+        for (wStr2 = lpcDllName; *wStr2; ++wStr2);
+		USHORT uDllNameLen = (wStr2 - lpcDllName) * sizeof(WCHAR);
 
-	// 	Nt::UNICODE_STRING usDllName = {0};
-	// 	usDllName.Buffer = lpDllName;
-	// 	usDllName.Length = uDllNameLen;
-    //     usDllName.MaximumLength = uDllNameLen + sizeof(WCHAR);
+		UNICODE_STRING usDllName = {0};
+		usDllName.Buffer = lpDllName;
+		usDllName.Length = uDllNameLen;
+        usDllName.MaximumLength = uDllNameLen + sizeof(WCHAR);
 
-	// 	NTSTATUS status = CallSysInvoke(
-	// 		&pProcs->sysLdrLoadDll,
-	// 		pProcs->lpLdrLoadDll,
-	// 		nullptr,
-	// 		nullptr,
-	// 		&usDllName,
-	// 		&pModule
-	// 	);
-	// 	if (status != STATUS_SUCCESS || !pModule)
-	// 	{
-	// 		return nullptr;
-	// 	}
+        NTSTATUS status = lpLdrLoadDll(
+            nullptr,
+            nullptr,
+            &usDllName,
+            &pModule
+        );
+		if (status != STATUS_SUCCESS || !pModule)
+		{
+			return nullptr;
+		}
 
-    //     return pModule;
-    // }
+        return pModule;
+    }
 }

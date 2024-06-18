@@ -1,6 +1,6 @@
 # Shellcode Generator & Loader for Windows
 
-Simple implementation of Windows shellcode generator & loader written in C++.   
+Simple implementation of Windows shellcode generator &loader written in C++.   
 
 ## Install Dependencies
 
@@ -29,5 +29,5 @@ Transfer the generated shellcode and loader to Windows machine and execute as be
 ```powershell
 .\ldr.x64.exe <PID> <SHELLCODE_PATH>
 # e.g.
-.\ldr\build\ldr.x64.exe 12345 .\shellcode\build\shellcode.x64.bin
+.\ldr.x64.exe 12345 .\shellcode.x64.bin
 ```

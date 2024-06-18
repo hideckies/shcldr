@@ -3,12 +3,8 @@ from typing import Mapping
 FUNCS = [
     # NTAPI
     "LdrLoadDll",
-    "NtFlushInstructionCache",
     
     # WINAPI
-    "DllMain",
-    "GetProcAddress",
-    "LoadLibraryA",
     "MessageBoxA",
 ]
 

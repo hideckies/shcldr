@@ -1,8 +1,8 @@
 CCX64 = x86_64-w64-mingw32-g++
 CCX86 = i686-w64-mingw32-g++
 
-CFLAGS = -Os -masm=intel -nostdlib
-CFLAGS += -s -ffunction-sections -fno-ident -fno-asynchronous-unwind-tables -w
+CFLAGS = -Os -s -masm=intel -nostdlib
+CFLAGS += -ffunction-sections -fno-ident -fno-asynchronous-unwind-tables -w
 CFLAGS += -fpack-struct=8 -falign-labels=1 -falign-jumps=1 -fPIC
 CFLAGS += -Wl,-Tscript/linker.ld
 CFLAGS += -Wl,-s,--no-seh,--enable-stdcall-fixup

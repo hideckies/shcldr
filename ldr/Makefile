@@ -1,7 +1,10 @@
 CCX64 = x86_64-w64-mingw32-g++
 CCX86 = i686-w64-mingw32-g++
 
-CFLAGS = -Wall -fPIC
+CFLAGS = -Wall -Os -s
+CFLAGS += -fPIC -fno-exceptions -ffunction-sections -fdata-sections
+CFLAGS += -falign-jumps=1 -falign-labels=1 -fno-asynchronous-unwind-tables
+CFLAGS += -static-libgcc
 
 INCLUDE = -I include
 

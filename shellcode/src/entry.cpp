@@ -16,16 +16,22 @@ __attribute__((section(".text.Entry"))) VOID Entry()
     {
         return;
     }
-    HMODULE hUser32 = (HMODULE)Modules::GetModuleByHash(HASH_MODULE_USER32);
-    if (!hKernel32)
+
+    Procs::LPPROC_LDRLOADDLL lpLdrLoadDll = reinterpret_cast<Procs::LPPROC_LDRLOADDLL>(Procs::GetProcAddressByHash(hNtdll, HASH_FUNC_LDRLOADDLL));
+
+    // ------------------------------------------------------------------
+    // Get runtime modules and functions
+    // ------------------------------------------------------------------
+
+    WCHAR wUser32[] = L"user32.dll";
+    HMODULE hUser32 = (HMODULE)Modules::LoadModule(lpLdrLoadDll, wUser32);
+    if (!hUser32)
     {
         return;
     }
-
-    Procs::LPPROC_LDRLOADDLL lpLdrLoadDll = reinterpret_cast<Procs::LPPROC_LDRLOADDLL>(Procs::GetProcAddressByHash(hNtdll, HASH_FUNC_LDRLOADDLL));
-    Procs::LPPROC_LOADLIBRARYA lpLoadLibraryA = reinterpret_cast<Procs::LPPROC_LOADLIBRARYA>(Procs::GetProcAddressByHash(hKernel32, HASH_FUNC_LOADLIBRARYA));
+    
     Procs::LPPROC_MESSAGEBOXA lpMessageBoxA = reinterpret_cast<Procs::LPPROC_MESSAGEBOXA>(Procs::GetProcAddressByHash(hUser32, HASH_FUNC_MESSAGEBOXA));
-
+    
     // ------------------------------------------------------------------
     // Execute arbitrary function
     // ------------------------------------------------------------------
