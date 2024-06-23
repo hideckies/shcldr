@@ -10,15 +10,12 @@ INCLUDE = -I include
 
 SOURCE = src/ldr.cpp src/main.cpp
 
-OUTX64 = build/ldr.x64.exe
-OUTX86 = build/ldr.x86.exe
-
-all: x64 x86
+OUTFILE = build/ldr.exe
 
 x64:
-	mkdir -p build
-	$(CCX64) -o $(OUTX64) $(CFLAGS) $(INCLUDE) $(SOURCE)
+	mkdir -p build && rm -rf build/*
+	$(CCX64) -o $(OUTFILE) $(CFLAGS) $(INCLUDE) $(SOURCE)
 
 x86:
-	mkdir -p build
-	$(CCX64) -o $(OUTX86) $(CFLAGS) $(INCLUDE) $(SOURCE)
+	mkdir -p build && rm -rf build/*
+	$(CCX86) -o $(OUTFILE) $(CFLAGS) $(INCLUDE) $(SOURCE)

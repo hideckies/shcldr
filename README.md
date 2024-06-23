@@ -15,11 +15,11 @@ We need to compile both shellcode and loader on Linux using MinGW.
 ```sh
 # 1. Compile shellcode
 cd shellcode && make
-file build/shellcode.x64.bin
+file build/shellcode.bin
 
 # 2. Compile loader
 cd ldr && make
-file build/ldr.x64.exe
+file build/ldr.exe
 ```
 
 ## Run
@@ -27,7 +27,7 @@ file build/ldr.x64.exe
 Transfer the generated shellcode and loader to Windows machine and execute as below:
 
 ```powershell
-.\ldr.x64.exe <PID> <SHELLCODE_PATH>
+.\ldr.exe <PID> <SHELLCODE_PATH>
 # e.g.
-.\ldr.x64.exe 12345 .\shellcode.x64.bin
+.\ldr.exe 12345 .\shellcode.bin
 ```

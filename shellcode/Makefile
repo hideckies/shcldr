@@ -9,24 +9,22 @@ CFLAGS += -Wl,-s,--no-seh,--enable-stdcall-fixup
 
 INCLUDE = -I include
 
+ASM_OUT = build/alignstack.o
+
 SOURCE = src/core/*.cpp src/entry.cpp
 
-OUTTEMPX64 = build/tmp.x64.exe
-OUTTEMPX86 = build/tmp.x86.exe
+OUTTEMP = build/tmp.exe
 
-OUTFILEX64 = build/shellcode.x64.bin
-OUTFILEX86 = build/shellcode.x86.bin
-
-all: x64 x86
+OUTFILE = build/shellcode.bin
 
 x64:
-	mkdir -p build
-	nasm -f win64 -o build/alignstack.x64.o src/asm/alignstack.x64.asm
-	$(CCX64) -o $(OUTTEMPX64) $(CFLAGS) -Iinclude $(SOURCE) build/alignstack.x64.o
-	python3 script/extract.py -f $(OUTTEMPX64) -o $(OUTFILEX64)
+	mkdir -p build && rm -rf build/*
+	nasm -f win64 -o $(ASM_OUT) src/asm/alignstack.x64.asm
+	$(CCX64) -o $(OUTTEMP) $(CFLAGS) $(INCLUDE) $(SOURCE) $(ASM_OUT)
+	python3 script/extract.py -f $(OUTTEMP) -o $(OUTFILE)
 
 x86:
-	mkdir -p build
-	nasm -f win32 -o build/alignstack.x86.o src/asm/alignstack.x86.asm
-	$(CCX86) -o $(OUTTEMPX86) $(CFLAGS) -Iinclude $(SOURCE) build/alignstack.x86.o
-	python3 script/extract.py -f $(OUTTEMPX86) -o $(OUTFILEX86)
+	mkdir -p build && rm -rf build/*
+	nasm -f win32 -o $(ASM_OUT) src/asm/alignstack.x86.asm
+	$(CCX86) -o $(OUTTEMP) $(CFLAGS) $(INCLUDE) $(SOURCE) $(ASM_OUT)
+	python3 script/extract.py -f $(OUTTEMP) -o $(OUTFILE)
