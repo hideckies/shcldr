@@ -1,6 +1,6 @@
-# Shellcode Generator & Loader for Windows
+# Shellcode & Loader of Windows
 
-Simple implementation of Windows shellcode generator &loader written in C++.   
+Simple implementation of Windows shellcode &loader written in C++.   
 
 ## Install Dependencies
 
